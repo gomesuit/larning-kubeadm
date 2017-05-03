@@ -7,7 +7,6 @@ Vagrant.configure("2") do |config|
   config.vm.box = "bento/centos-7.2"
   config.ssh.forward_agent = true
   config.vm.provision "shell", path: "install-common-package.sh"
-  config.vm.provision "shell", path: "install-docker.sh"
   config.vm.provision "shell", path: "install-kubeadm.sh"
 
   MASTER_ADDRESS = "192.168.33.10"

@@ -5,4 +5,3 @@ setenforce 0
 yum install -y docker kubelet kubeadm kubectl kubernetes-cni
 systemctl enable docker && systemctl start docker
 systemctl enable kubelet && systemctl start kubelet
-
