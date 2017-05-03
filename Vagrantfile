@@ -19,6 +19,6 @@ Vagrant.configure("2") do |config|
 
     host.vm.hostname = _HOSTNAME
     host.vm.network "private_network", ip: _PRIVATE_IP_ADDRESS
-    #host.vm.provision "shell", path: "install-kubernetes-master.sh"
+    host.vm.provision "shell", path: "install-kubeadm.sh"
   end
 end
