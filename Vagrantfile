@@ -28,10 +28,10 @@ Vagrant.configure("2") do |config|
     config.vm.define "node#{i}" do |subconfig|
       subconfig.vm.hostname = "node#{i}"
       subconfig.vm.network "private_network", ip: "192.168.33.1#{i}"
-      subconfig.vm.provision "shell" do |s|
-        s.path = "join-kubeadm.sh"
-        s.args = MASTER_ADDRESS
-      end
+      #subconfig.vm.provision "shell" do |s|
+      #  s.path = "join-kubeadm.sh"
+      #  s.args = MASTER_ADDRESS
+      #end
     end
   end
 end
