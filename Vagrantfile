@@ -8,6 +8,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
   config.vm.provision "shell", path: "install-common-package.sh"
   config.vm.provision "shell", path: "install-kubeadm.sh"
+  #config.vm.provision "shell", path: "set-hosts.sh"
 
   MASTER_ADDRESS = "192.168.33.10"
 
@@ -21,6 +22,7 @@ Vagrant.configure("2") do |config|
 
     host.vm.hostname = _HOSTNAME
     host.vm.network "private_network", ip: _PRIVATE_IP_ADDRESS
+    host.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.*master.*/192\.168\.33\.10 master/' -i /etc/hosts"
     host.vm.provision "shell", path: "init-kubeadm.sh"
   end
 
@@ -28,6 +30,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "node#{i}" do |subconfig|
       subconfig.vm.hostname = "node#{i}"
       subconfig.vm.network "private_network", ip: "192.168.33.1#{i}"
+      subconfig.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.*master.*/192\.168\.33\.1#{i} master/' -i /etc/hosts"
       subconfig.vm.provision "shell" do |s|
         s.path = "join-kubeadm.sh"
         s.args = MASTER_ADDRESS
