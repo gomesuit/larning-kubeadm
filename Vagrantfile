@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "node#{i}" do |subconfig|
       subconfig.vm.hostname = "node#{i}"
       subconfig.vm.network "private_network", ip: "192.168.33.1#{i}"
-      subconfig.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.*master.*/192\.168\.33\.1#{i} master/' -i /etc/hosts"
+      subconfig.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.*node#{i}.*/192\.168\.33\.1#{i} node#{i}/' -i /etc/hosts"
       subconfig.vm.provision "shell" do |s|
         s.path = "join-kubeadm.sh"
         s.args = MASTER_ADDRESS
