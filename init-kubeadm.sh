@@ -6,3 +6,5 @@ JOIN_TOKEN=$(kubeadm token list | grep 'default' | awk '{print $1}')
 
 echo $JOIN_TOKEN
 echo $JOIN_TOKEN > /vagrant/.token
+
+kubectl --kubeconfig /etc/kubernetes/admin.conf apply -f https://git.io/weave-kube-1.6
