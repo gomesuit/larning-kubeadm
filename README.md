@@ -9,6 +9,7 @@ vagrant up
 ```sh
 # masterで
 kubectl --kubeconfig /etc/kubernetes/admin.conf get nodes
+kubectl --kubeconfig /etc/kubernetes/admin.conf get po -o wide --all-namespaces
 ```
 
 ## 削除
