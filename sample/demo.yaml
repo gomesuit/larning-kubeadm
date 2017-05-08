@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: demo
+  labels:
+    name: demo
+    role: web
+spec:
+  minReadySeconds: 30
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0
+  replicas: 1
+  template:
+    metadata:
+      name: demo
+      labels:
+        name: demo
+        role: web
+    spec:
+      containers:
+      - image: nginx
+        name: demo
+        ports:
+        - containerPort: 80
+        readinessProbe: # traffic を受けるタイミングを指定
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5 # 5s後にチェックする
+          timeoutSeconds: 10 # 10s 以上は timeout
+          failureThreshold: 20 # 失敗回数
+        livenessProbe: # healthcheck 用
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5 # 5s後にチェックする
+          timeoutSeconds: 10 # 10s 以上は timeout
+          failureThreshold: 20 # 失敗回数
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo
+  labels:
+    name: demo
+    role: web
+spec:
+  ports:
+  - port: 80 # Service opened port.
+    protocol: TCP
+    targetPort: 80 # Endpoint of containerPort
+  selector:
+    name: demo
+    role: web
+  type: LoadBalancer
