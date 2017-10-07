@@ -1,4 +1,5 @@
 #!/bin/sh
+set -ex
 
 if [ $# -ne 1 ]; then
   echo "usage : $0 [master ip]"

@@ -1,10 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-NODE_COUNT = 2
+NODE_COUNT = 1
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "bento/centos-7.2"
+  config.vm.box = "bento/centos-7.3"
   config.ssh.forward_agent = true
   config.vm.provision "shell", path: "install-common-package.sh"
   config.vm.provision "shell", path: "install-kubeadm.sh"
@@ -13,7 +13,8 @@ Vagrant.configure("2") do |config|
   MASTER_ADDRESS = "192.168.33.10"
 
   config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--memory", "2048"]
+    #vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
   end
 
   config.vm.define :master do |host|

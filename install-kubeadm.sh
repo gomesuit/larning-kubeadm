@@ -1,4 +1,5 @@
 #!/bin/sh
+set -ex
 
 ln -s /vagrant/settings/kubernetes.repo /etc/yum.repos.d/kubernetes.repo
 ln -s /vagrant/settings/k8s.conf /etc/sysctl.d/k8s.conf

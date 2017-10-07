@@ -1,4 +1,5 @@
 #!/bin/sh
+set -ex
 
 echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
 kubeadm init --skip-preflight-checks --apiserver-advertise-address 192.168.33.10 --pod-network-cidr 10.244.0.0/16
