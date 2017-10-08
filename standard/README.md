@@ -28,3 +28,8 @@ curl http://192.168.33.10:<port>
 kubectl --kubeconfig /etc/kubernetes/admin.conf delete namespace sock-shop
 ```
 
+- メモ
+  - https://kubernetes.io/docs/admin/authorization/
+  - https://ishiis.net/2017/01/21/kubernetes-authentication-authorization/
+  - https://qiita.com/hiyosi/items/43465d4fc501c2044d01#static-password-file
+
