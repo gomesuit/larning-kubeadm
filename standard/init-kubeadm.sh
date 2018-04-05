@@ -3,13 +3,12 @@ set -ex
 
 # https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
 
-kubeadm init --skip-preflight-checks --apiserver-advertise-address 192.168.33.10 --pod-network-cidr 10.244.0.0/16
+kubeadm init --skip-preflight-checks --apiserver-advertise-address 192.168.33.10 --pod-network-cidr 10.244.0.0/16 --token 70yt8u.1mn1tm9o2x13uxhs
 # kubeadm init --skip-preflight-checks --apiserver-advertise-address 192.168.33.10 --pod-network-cidr 10.244.0.0/16 --kubernetes-version 1.7.7
 
-JOIN_TOKEN=$(kubeadm token list | grep 'default' | awk '{print $1}')
+JOIN_TOKEN=70yt8u.1mn1tm9o2x13uxhs
 
 echo $JOIN_TOKEN
-echo $JOIN_TOKEN > /vagrant/.token
 
 mkdir -p ~/.kube
 cp /etc/kubernetes/admin.conf ~/.kube/config

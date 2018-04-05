@@ -7,6 +7,6 @@ if [ $# -ne 1 ]; then
 fi
 
 MASTER_IP=$1
-JOIN_TOKEN=$(cat /vagrant/.token)
+JOIN_TOKEN=70yt8u.1mn1tm9o2x13uxhs
 
 kubeadm join --skip-preflight-checks --token "$JOIN_TOKEN" "$MASTER_IP:6443"
