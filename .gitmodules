@@ -1,0 +1,3 @@
+[submodule "standard/ansible-roles"]
+	path = standard/ansible-roles
+	url = https://github.com/gomesuit/ansible-common-roles.git
