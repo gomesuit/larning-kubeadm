@@ -6,7 +6,7 @@
 git submodule update --init
 vagrant up
 vagrant ssh master -c "$(cat init-kubeadm.sh)"
-vagrant ssh node1 -c 'sudo kubeadm join 192.168.33.10:6443 --token xxxxxxxxxxxxxxxx --discovery-token-ca-cert-hash sha256:xczvcxzvcxzvcxvcxzvxzcvxczv'
+vagrant ssh node1 -c 'sudo kubeadm join 192.168.33.10:6443 --token xxxxxxxxxxxxxxxx --discovery-token-unsafe-skip-ca-verification'
 ```
 
 ## 確認
