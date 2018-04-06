@@ -5,7 +5,7 @@
 ```sh
 git submodule update --init
 vagrant up
-./init-kubeadm.sh
+./create-cluster.sh
 ```
 
 ## 確認
