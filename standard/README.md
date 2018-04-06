@@ -12,8 +12,8 @@ vagrant ssh node1 -c 'sudo kubeadm join 192.168.33.10:6443 --token xxxxxxxxxxxxx
 ## 確認
 ```sh
 # masterで
-kubectl --kubeconfig /etc/kubernetes/admin.conf get nodes
-kubectl --kubeconfig /etc/kubernetes/admin.conf get po -o wide --all-namespaces
+kubectl get nodes
+kubectl get po -o wide --all-namespaces
 ```
 
 ## 削除
@@ -25,11 +25,11 @@ kubeadm reset
 
 ## sample
 ```
-kubectl --kubeconfig /etc/kubernetes/admin.conf create namespace sock-shop
-kubectl --kubeconfig /etc/kubernetes/admin.conf apply -n sock-shop -f "https://github.com/microservices-demo/microservices-demo/blob/master/deploy/kubernetes/complete-demo.yaml?raw=true"
-kubectl --kubeconfig /etc/kubernetes/admin.conf -n sock-shop get svc front-end
+kubectl create namespace sock-shop
+kubectl apply -n sock-shop -f "https://github.com/microservices-demo/microservices-demo/blob/master/deploy/kubernetes/complete-demo.yaml?raw=true"
+kubectl -n sock-shop get svc front-end
 curl http://192.168.33.10:<port>
-kubectl --kubeconfig /etc/kubernetes/admin.conf delete namespace sock-shop
+kubectl delete namespace sock-shop
 ```
 
 - メモ
