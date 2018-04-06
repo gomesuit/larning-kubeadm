@@ -1,8 +1,11 @@
 # larning-kubeadm
 
 ## getting-started
+
 ```sh
+git submodule update --init
 vagrant up
+vagrant ssh master -c "$(cat init-kubeadm.sh)"
 ```
 
 ## 確認
