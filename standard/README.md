@@ -8,6 +8,12 @@ vagrant up
 ./create-cluster.sh
 ```
 
+## get config
+
+```sh
+vagrant ssh master -c 'sudo cat /etc/kubernetes/admin.conf' 2> /dev/null > ~/.kube/config
+```
+
 ## 確認
 ```sh
 # masterで
