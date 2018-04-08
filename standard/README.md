@@ -19,6 +19,19 @@ vagrant ssh master -c 'sudo cat /etc/kubernetes/admin.conf' 2> /dev/null > ~/.ku
 # masterで
 kubectl get nodes
 kubectl get po -o wide --all-namespaces
+kubectl get componentstatuses
+kubectl get ds -n kube-system kube-proxy
+kubectl get svc -n kube-system kube-dns
+```
+
+## dashboard
+
+- https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+- https://github.com/kubernetes/dashboard
+
+```sh
+kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+kubectl proxy
 ```
 
 ## 削除
