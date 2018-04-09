@@ -50,6 +50,13 @@ curl http://192.168.33.10:<port>
 kubectl delete namespace sock-shop
 ```
 
+## Podの作成
+
+```sh
+kubectl run kuard --image=gcr.io/kuar-demo/kuard-amd64:1
+kubectl delete deployments/kuard
+```
+
 - メモ
   - https://kubernetes.io/docs/admin/authorization/
   - https://ishiis.net/2017/01/21/kubernetes-authentication-authorization/
