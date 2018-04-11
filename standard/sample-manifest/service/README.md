@@ -22,4 +22,8 @@ kubectl port-forward $ALPACA_POD 48858:8080
 
 # http://localhost:48858
 # alpaca-prod.default.svc.cluster.local.
+
+kubectl edit deploy/alpaca-prod
+
+kubectl get endpoints alpaca-prod --watch
 ```
