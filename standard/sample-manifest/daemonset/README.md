@@ -1,6 +1,6 @@
 ```bash
 $ kubectl apply -f fluentd.yaml
-daemonset.extensions "fluentd" created 
+daemonset.extensions "fluentd" created
 $ kubectl describe ds fluentd --namespace=kube-system
 Name:           fluentd
 Selector:       app=fluentd
