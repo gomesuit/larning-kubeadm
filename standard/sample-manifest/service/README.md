@@ -32,4 +32,6 @@ kubectl get endpoints alpaca-prod --watch
 kubectl edit service/alpaca-prod
 
 curl 192.168.33.11:31049
+
+kubectl delete service,deploy -l app
 ```
