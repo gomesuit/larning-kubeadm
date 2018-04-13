@@ -194,3 +194,7 @@ $ kubectl logs parallel-rsczt
 2018/04/13 09:07:30 (ID 0 10/10) Item done: SHA256:5yIrCmWBvZQkGgQwU8VJvGV9dEmTxmLqLyJlpDw2coM
 2018/04/13 09:07:30 (ID 0) Workload exiting
 ```
+
+```
+$ kubectl apply -f rs-queue.yaml
+```
