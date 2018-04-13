@@ -109,7 +109,7 @@ $ kubectl logs oneshot-8gh7q
 ```
 
 ```
-$ kubectl apply -f job-oneshot-failure.yaml
+$ kubectl apply -f job-oneshot-failure1.yaml
 job.batch "oneshot" created
 $ kubectl get pods -a -l job-name=oneshot
 Flag --show-all has been deprecated, will be removed in an upcoming release
@@ -118,4 +118,79 @@ oneshot-zghn8   0/1       CrashLoopBackOff   3          2m
 ```
 
 ```
+$ kubectl apply -f job-oneshot-failure2.yaml
+job.batch "oneshot" created
+
+$ kubectl get pods -l job-name=oneshot
+NAME            READY     STATUS              RESTARTS   AGE
+oneshot-5cl26   0/1       Error               0          2m
+oneshot-5rqdv   0/1       Error               0          1m
+oneshot-9b8nh   0/1       Error               0          35s
+oneshot-fxpwt   0/1       ContainerCreating   0          11s
+oneshot-kszqt   0/1       Error               0          1m
+oneshot-mz2g5   0/1       Error               0          58s
+oneshot-v5vzb   0/1       Error               0          2m
+oneshot-wthhb   0/1       Error               0          2m
+```
+
+```
+$ kubectl apply -f job-parallel.yaml
+job.batch "parallel" created
+
+$ kubectl get pods -w
+NAME             READY     STATUS      RESTARTS   AGE
+parallel-4s84q   0/1       Completed   0          2m
+parallel-6cmnv   0/1       Completed   0          1m
+parallel-7v9mh   0/1       Completed   0          3m
+parallel-9d6sp   0/1       Completed   0          3m
+parallel-bd2tl   0/1       Completed   0          3m
+parallel-gzs4t   0/1       Completed   0          2m
+parallel-ksf9b   0/1       Completed   0          3m
+parallel-nt2wm   0/1       Completed   0          3m
+parallel-plxzl   0/1       Completed   0          1m
+parallel-rsczt   0/1       Completed   0          1m
+
+$ kubectl logs parallel-rsczt
+2018/04/13 09:06:29 Starting kuard version: v0.7.2-1
+2018/04/13 09:06:29 **********************************************************************
+2018/04/13 09:06:29 * WARNING: This server may expose sensitive
+2018/04/13 09:06:29 * and secret information. Be careful.
+2018/04/13 09:06:29 **********************************************************************
+2018/04/13 09:06:29 Config:
+{
+  "address": ":8080",
+  "debug": false,
+  "debug-sitedata-dir": "./sitedata",
+  "keygen": {
+    "enable": true,
+    "exit-code": 0,
+    "exit-on-complete": true,
+    "memq-queue": "",
+    "memq-server": "",
+    "num-to-gen": 10,
+    "time-to-run": 0
+  },
+  "liveness": {
+    "fail-next": 0
+  },
+  "readiness": {
+    "fail-next": 0
+  },
+  "tls-address": ":8443",
+  "tls-dir": "/tls"
+}
+2018/04/13 09:06:29 Could not find certificates to serve TLS
+2018/04/13 09:06:29 Serving on HTTP on :8080
+2018/04/13 09:06:29 (ID 0) Workload starting
+2018/04/13 09:06:32 (ID 0 1/10) Item done: SHA256:esdgQQs/xgRM/uPNfiEe2SmDGm2ouSWEOOEdnclN/KA
+2018/04/13 09:06:33 (ID 0 2/10) Item done: SHA256:VdwnZ5SMxfTGk/1Bt0N+ewxbN0eyt/9J9lwFyD9gE1Y
+2018/04/13 09:06:39 (ID 0 3/10) Item done: SHA256:Ancj4na1uXXMb/55Qs5f1q9UeYJWk7bohyxdZl9CGOg
+2018/04/13 09:06:49 (ID 0 4/10) Item done: SHA256:aU1hoVVnzeY8vXkJR9q9sycPhRY6xQ6t+NfyvtJmPko
+2018/04/13 09:07:00 (ID 0 5/10) Item done: SHA256:a6ZhbVVEQOczQZz0seBSbej1STV4a5/S1jwmRdFpNcU
+2018/04/13 09:07:06 (ID 0 6/10) Item done: SHA256:yaT2ps2eZk59TIQ9wZZLdmQLR4FTRh53Pou4sukanUc
+2018/04/13 09:07:13 (ID 0 7/10) Item done: SHA256:Q5rWVnq1pEQJO2hXKRl8kA8ZHPdIt+n2leV0mjf1fyw
+2018/04/13 09:07:16 (ID 0 8/10) Item done: SHA256:dzI2PGDLKbDDbdGEQMpBgyRB0w9FyQ2hGD00+0u9Fkg
+2018/04/13 09:07:22 (ID 0 9/10) Item done: SHA256:FmDUr4CFZ+XWJPGdA7eLDljSHTNDQGykgbHB7ZX1DH4
+2018/04/13 09:07:30 (ID 0 10/10) Item done: SHA256:5yIrCmWBvZQkGgQwU8VJvGV9dEmTxmLqLyJlpDw2coM
+2018/04/13 09:07:30 (ID 0) Workload exiting
 ```
