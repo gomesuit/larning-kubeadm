@@ -153,4 +153,6 @@ REVISION  CHANGE-CAUSE
 4         Update nginx to 1.9.10
 5         Update nginx to 1.10.2
 
+$ kubectl delete -f nginx-deployment.yaml
+deployment.extensions "nginx" deleted
 ```
