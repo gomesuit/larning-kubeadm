@@ -200,4 +200,20 @@ $ kubectl apply -f rs-queue.yaml
 $ QUEUE_POD=$(kubectl get pods -l app=work-queue,component=queue -o jsonpath='{.items[0].metadata.name}')
 $ kubectl port-forward $QUEUE_POD 8080:8080
 $ kubectl apply -f service-queue.yaml
+$ ./load-queue.sh
+$ curl localhost:8080/memq/server/stats
+
+$ kubectl apply -f job-consumers.yaml
+job.batch "consumers" created
+
+$ kubectl get pods
+NAME              READY     STATUS              RESTARTS   AGE
+consumers-25m8m   0/1       ContainerCreating   0          7s
+consumers-2cqlr   0/1       ContainerCreating   0          7s
+consumers-8zf8g   0/1       ContainerCreating   0          7s
+consumers-bchpw   0/1       ContainerCreating   0          7s
+consumers-c7465   0/1       ContainerCreating   0          7s
+queue-2lgjf       1/1       Running             0          6h
+
+$ kubectl delete rs,svc,job -l chapter=jobs
 ```
