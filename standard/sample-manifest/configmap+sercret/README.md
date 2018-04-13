@@ -71,3 +71,37 @@ kubectl create secret docker-registry my-image-pull-secret \
 --docker-email=<email>
 ```
 
+```
+$ kubectl get secrets
+NAME                  TYPE                                  DATA      AGE
+default-token-6thfm   kubernetes.io/service-account-token   3         1d
+kuard-tls             Opaque                                2         16m
+
+$ kubectl get configmap
+NAME        DATA      AGE
+my-config   3         32m
+
+$ kubectl describe configmap my-config
+Name:         my-config
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+another-param:
+----
+another-value
+extra-param:
+----
+extra-value
+my-config.txt:
+----
+parameter1 = value1
+parameter2 = value2
+
+Events:  <none>
+
+$ kubectl get configmap my-config -o yaml
+$ kubectl get secret kuard-tls -o yaml
+```
