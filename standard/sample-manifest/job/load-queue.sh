@@ -1,0 +1,10 @@
+#/bin/bash -e
+
+# 'keygen'というキューを作成
+curl -X PUT localhost:8080/memq/server/queue/keygen
+
+# サブタスク(work item)を100個作ってキューに入れる
+for i in work-item-{0..99}; do
+  curl -X PUT localhost:8080/memq/server/queue/keygen/enqueue \
+    -d "$i"
+done
