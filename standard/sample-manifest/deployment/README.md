@@ -76,4 +76,42 @@ $ kubectl get deploy nginx
 NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 nginx     3         3         3            3           17m
 
+
+# nginx update 1.9.10
+
+$ kubectl apply -f nginx-deployment.yaml
+deployment.extensions "nginx" configured
+
+$ kubectl rollout status deploy nginx
+deployment "nginx" successfully rolled out
+
+$ kubectl get rs -o wide
+NAME               DESIRED   CURRENT   READY     AGE       CONTAINERS   IMAGES         SELECTOR
+nginx-784d96dbff   3         3         3         2m        nginx        nginx:1.9.10   pod-template-hash=3408528699,run=nginx
+nginx-7d9bf79f9b   0         0         0         30m       nginx        nginx:1.7.12   pod-template-hash=3856935956,run=nginx
+
+$ kubectl rollout pause deploy nginx
+$ kubectl rollout resume deploy nginx
+
+$ kubectl rollout history deploy nginx
+deployments "nginx"
+REVISION  CHANGE-CAUSE
+1         <none>
+2         Update nginx to 1.9.10
+
+$ kubectl rollout history deploy nginx --revision=2
+deployments "nginx" with revision #2
+Pod Template:
+  Labels:       pod-template-hash=3408528699
+        run=nginx
+  Annotations:  kubernetes.io/change-cause=Update nginx to 1.9.10
+  Containers:
+   nginx:
+    Image:      nginx:1.9.10
+    Port:       <none>
+    Host Port:  <none>
+    Environment:        <none>
+    Mounts:     <none>
+  Volumes:      <none>
+
 ```
