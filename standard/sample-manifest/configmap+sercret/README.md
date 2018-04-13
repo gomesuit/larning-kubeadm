@@ -33,3 +33,41 @@ Forwarding from [::1]:8080 -> 8080
 # http://localhost:8080/fs/config/
 ```
 
+```
+$ curl -o kuard.crt https;//storage.googleapis.com/kuar-demo/kuard.crt
+$ curl -o kuard.key https://storage.googleapis.com/kuar-demo/kuard.key
+
+$ kubectl create secret generic kuard-tls \
+--from-file=kuard.crt \
+--from-file=kuard.key
+
+$ kubectl describe secrets kuard-tls
+Name:         kuard-tls
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+kuard.crt:  1050 bytes
+kuard.key:  1679 bytes
+
+$ kubectl apply -f kuard-secret.yaml
+pod "kuard-tls" created
+
+$ kubectl port-forward kuard-tls 8443:8443
+Forwarding from 127.0.0.1:8443 -> 8443
+Forwarding from [::1]:8443 -> 8443
+
+# https://localhost:8443/
+```
+
+```
+kubectl create secret docker-registry my-image-pull-secret \
+--docker-username=<user> \
+--docker-password=<password> \
+--docker-email=<email>
+```
+
