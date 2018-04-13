@@ -114,4 +114,43 @@ Pod Template:
     Mounts:     <none>
   Volumes:      <none>
 
+
+
+# nginx 1.9.10 -> 1.10.2
+$ kubectl apply -f nginx-deployment.yaml
+deployment.extensions "nginx" configured
+
+$ kubectl rollout history deploy nginx
+deployments "nginx"
+REVISION  CHANGE-CAUSE
+1         <none>
+2         Update nginx to 1.9.10
+3         Update nginx to 1.10.2
+
+$ kubectl rollout undo deploy nginx
+deployment.apps "nginx"
+
+$ kubectl get rs -o wide
+NAME               DESIRED   CURRENT   READY     AGE       CONTAINERS   IMAGES         SELECTOR
+nginx-5c9fb5498f   0         0         0         50s       nginx        nginx:1.10.2   pod-template-hash=1759610549,run=nginx
+nginx-784d96dbff   3         3         2         10m       nginx        nginx:1.9.10   pod-template-hash=3408528699,run=nginx
+nginx-7d9bf79f9b   0         0         0         37m       nginx        nginx:1.7.12   pod-template-hash=3856935956,run=nginx
+
+$ kubectl rollout history deploy nginx
+deployments "nginx"
+REVISION  CHANGE-CAUSE
+1         <none>
+3         Update nginx to 1.10.2
+4         Update nginx to 1.9.10
+
+$ kubectl rollout undo deploy nginx --to-revision=3
+deployment.apps "nginx"
+
+$ kubectl rollout history deploy nginx
+deployments "nginx"
+REVISION  CHANGE-CAUSE
+1         <none>
+4         Update nginx to 1.9.10
+5         Update nginx to 1.10.2
+
 ```
