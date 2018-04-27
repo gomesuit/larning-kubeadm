@@ -1,0 +1,3 @@
+[submodule "kubeadm/standard/ansible-roles"]
+	path = kubeadm/standard/ansible-roles
+	url = https://github.com/gomesuit/ansible-common-roles.git
