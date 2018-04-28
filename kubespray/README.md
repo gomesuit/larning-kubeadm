@@ -8,10 +8,10 @@ pip install netaddr
 ```
 
 ```
-git clone https://github.com/kubernetes-incubator/kubespray
+wget https://github.com/kubernetes-incubator/kubespray/archive/v2.5.0.zip
+unzip v2.5.0.zip
 
 cd kubespray
-git checkout v2.5.0
 
 # kubeconfig_localhost: true
 vim inventory/group_vars/k8s-cluster.yml
