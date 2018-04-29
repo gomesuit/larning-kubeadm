@@ -1,7 +1,8 @@
 
+ansible
 ```
+vim hosts.ini
 ansible all --private-key <key> -u <user> -m ping
-ansible-playbook playbook.yml
 ansible-playbook --private-key <key> -u <user> playbook.yml
 ```
 
